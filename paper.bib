@@ -8,14 +8,14 @@
 @article{dhariwal:2017,
   title={Openai baselines},
   author={Dhariwal, Prafulla and Hesse, Christopher and Klimov, Oleg and Nichol, Alex and Plappert, Matthias and Radford, Alec and Schulman, John and Sidor, Szymon and Wu, Yuhuai and Zhokhov, Peter},
-  journal={GitHub, GitHub repository},
+  url={https://github.com/openai/baselines},
   year={2017}
 }
 
 @article{schaarschmidt:2017,
   title={Tensorforce: A tensorflow library for applied reinforcement learning},
   author={Schaarschmidt, Michael and Kuhnle, Alexander and Fricke, Kai},
-  journal={Web page},
+  url={https://github.com/tensorflow/tensorflow},
   year={2017}
 }
 
@@ -29,7 +29,8 @@
 @article{caspi:2017,
   title={Reinforcement Learning Coach.(Dec. 2017)},
   author={Caspi, Itai and Leibovich, Gal and Novik, Gal},
-  journal={URL https://doi. org/10.5281/zenodo},
+  doi={10.5281/zenodo.1134899},
+  url={https://doi.org/10.5281/zenodo.1134899},
   volume={1134899},
   year={2017}
 }
@@ -37,7 +38,7 @@
 @inproceedings{abadi:2016,
   title={Tensorflow: A system for large-scale machine learning},
   author={Abadi, Mart{\'\i}n and Barham, Paul and Chen, Jianmin and Chen, Zhifeng and Davis, Andy and Dean, Jeffrey and Devin, Matthieu and Ghemawat, Sanjay and Irving, Geoffrey and Isard, Michael and others},
-  booktitle={12th $\{$USENIX$\}$ Symposium on Operating Systems Design and Implementation ($\{$OSDI$\}$ 16)},
+  booktitle={12th USENIX Symposium on Operating Systems Design and Implementation OSDI 16)},
   pages={265--283},
   year={2016}
 }
@@ -49,7 +50,7 @@
   year={2016}
 }
 
-@misc{kerasrl:2019, title={keras-rl/keras-rl}, url={https://github.com/keras-rl/keras-rl}, journal={GitHub}, author={Keras-Rl, Matthias Plappert}, year={2019}, month={Mar}}
+@misc{kerasrl:2019, title={keras-rl/keras-rl}, url={https://github.com/keras-rl/keras-rl}, journal={GitHub}, author={Matthias Plappert}, year={2019}, month={Mar}}
 
 @article{castro:2018,
   title={Dopamine: A research framework for deep reinforcement learning},
@@ -72,19 +73,30 @@
   year={2017}
 }
 
-@inproceedings{sutton:2000,
-  title={Policy gradient methods for reinforcement learning with function approximation},
-  author={Sutton, Richard S and McAllester, David A and Singh, Satinder P and Mansour, Yishay},
-  booktitle={Advances in neural information processing systems},
-  pages={1057--1063},
-  year={2000}
+@incollection{sutton2000,
+  title = {Policy Gradient Methods for Reinforcement Learning with Function Approximation},
+  author = {Sutton, Richard S and David A. McAllester and Satinder P. Singh and Mansour, Yishay},
+  booktitle = {{Advances in Neural Information Processing Systems 12}},
+  editor = {S. A. Solla and T. K. Leen and K. M\"{u}ller},
+  pages = {1057--1063},
+  year = {2000},
+  publisher = {MIT Press},
 }
 
 @inproceedings{silver2014deterministic,
-  title={Deterministic policy gradient algorithms},
-  author={Silver, David and Lever, Guy and Heess, Nicolas and Degris, Thomas and Wierstra, Daan and Riedmiller, Martin},
-  booktitle={ICML},
-  year={2014}
+  title = 	 {Deterministic Policy Gradient Algorithms},
+  author = 	 {David Silver and Guy Lever and Nicolas Heess and Thomas Degris and Daan Wierstra and Martin Riedmiller},
+  booktitle = 	 {{Proceedings of the 31st International Conference on Machine Learning}},
+  pages = 	 {387--395},
+  year = 	 {2014},
+  editor = 	 {Eric P. Xing and Tony Jebara},
+  volume = 	 {32},
+  number =       {1},
+  series = 	 {Proceedings of Machine Learning Research},
+  address = 	 {Bejing, China},
+  month = 	 {22--24 Jun},
+  publisher = 	 {{PMLR}},
+  url = 	 {http://proceedings.mlr.press/v32/silver14.html},
 }
 
 @article{schulman:2017,
@@ -116,17 +128,26 @@
   year={2018}
 }
 
-@misc{guadarramatf,
-  title={TF-Agents: A library for reinforcement learning in tensorflow},
-  author={Guadarrama, Sergio and Korattikara, Anoop and Ramirez, Oscar and Castro, Pablo and Holly, Ethan and Fishman, Sam and Wang, Ke and Gonina, Ekaterina and Harris, Chris and Vanhoucke, Vincent and others}
+@misc{TFAgents,
+  title={TF-Agents: A library for Reinforcement Learning in TensorFlow},
+  author={Sergio Guadarrama, Anoop Korattikara, Oscar Ramirez,
+    Pablo Castro, Ethan Holly, Sam Fishman, Ke Wang, Ekaterina Gonina, Neal Wu,
+    Chris Harris, Vincent Vanhoucke, Eugene Brevdo},
+  url={"https://github.com/tensorflow/agents"},
+  year={2018}
 }
 
-@misc{hill:2019, title={hill-a/stable-baselines}, url={https://github.com/hill-a/stable-baselines}, journal={GitHub}, author={Hill}, year={2019}, month={Jun}}
+@misc{hill:2019, 
+  title={hill-a/stable-baselines}, 
+  url={https://github.com/hill-a/stable-baselines}, 
+  author={Hill}, 
+  year={2019}, 
+  month={Jun}
+}
 
-@article{paszke:2017,
-  title={Pytorch},
-  author={Paszke, Adam and Gross, Sam and Chintala, Soumith and Chanan, Gregory},
-  journal={Computer software. Vers. 0.3},
-  volume={1},
+@inproceedings{paszke2017automatic,
+  title={Automatic Differentiation in PyTorch},
+  author={Paszke, Adam and Gross, Sam and Chintala, Soumith and Chanan, Gregory and Yang, Edward and DeVito, Zachary and Lin, Zeming and Desmaison, Alban and Antiga, Luca and Lerer, Adam},
+  booktitle={NIPS Autodiff Workshop},
   year={2017}
 }

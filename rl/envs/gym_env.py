@@ -2,6 +2,7 @@ import os
 import gym
 import numpy as np
 from gym import wrappers
+from . import atari
 from .env import Environment
 from .registry import register_env, get_reward_augmentation
 
@@ -22,7 +23,7 @@ class GymEnv(Environment):
 
     if hparams.record_video:
       directory = hparams.run_output_dir
-      if not hparams.training:
+      if hparams.test_only:
         directory = os.path.join(directory, 'eval')
       # save game play video every hparams.save_every
       self._env = wrappers.Monitor(
@@ -30,7 +31,7 @@ class GymEnv(Environment):
           directory=os.path.join(directory, 'video'),
           video_callable=lambda count: count % hparams.save_every == 0,
           force=True,
-          mode='training' if hparams.training else 'evaluation')
+          mode='evaluation' if hparams.test_only else 'training')
 
     self.seed(self._hparams.seed)
     self._observation_space = self._env.observation_space
@@ -70,6 +71,8 @@ class GymEnv(Environment):
 
   def reset(self):
     """Resets the state of the environment and returns an initial observation."""
+    if 'procgen' in self._hparams.env:
+      self._env = gym.make(self._hparams.env)
     state = self._env.reset()
     if self._hparams.pixel_input:
       state = state.astype(np.int8)

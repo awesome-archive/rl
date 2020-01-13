@@ -1,7 +1,7 @@
-## [FOR.ai](https://for.ai) Reinforcement Learning Codebase [![Build Status](https://travis-ci.org/for-ai/rl.svg?branch=master)](https://travis-ci.org/for-ai/rl)
+## [FOR.ai](https://for.ai) Reinforcement Learning Codebase [![status](http://joss.theoj.org/papers/a65da0f74f34be097b1c1189ae6abdc6/status.svg)](http://joss.theoj.org/papers/a65da0f74f34be097b1c1189ae6abdc6) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3408453.svg)](https://doi.org/10.5281/zenodo.3408453) [![Build Status](https://travis-ci.org/for-ai/rl.svg?branch=master)](https://travis-ci.org/for-ai/rl) [![](https://img.shields.io/badge/-documentation-blue)](https://rl-codebase.readthedocs.io/en/latest/) 
 Modular codebase for reinforcement learning models training, testing and visualization.
 
-**Contributors**: [Bryan M. Li](https://github.com/bryanlimy), [Alexander Cowen-Rivers](https://github.com/alexanderimanicowenrivers), [Piotr Kozakowski](https://github.com/koz4k), [David Tao](https://github.com/taodav), [Siddhartha Rao Kamalakara](https://github.com/srk97), [Nitarshan Rajkumar](https://github.com/nitarshan), [Hariharan Sezhiyan](https://github.com/hsezhiyan), [Sourav Singh](https://github.com/souravsingh), [Aidan N. Gomez](https://github.com/aidangomez)
+**Contributors**: [Bryan M. Li](https://github.com/bryanlimy), [Alexander Cowen-Rivers](https://github.com/alexanderimanicowenrivers), [Piotr Kozakowski](https://github.com/koz4k), [David Tao](https://github.com/taodav), [Siddhartha Rao Kamalakara](https://github.com/srk97), [Nitarshan Rajkumar](https://github.com/nitarshan), [Hariharan Sezhiyan](https://github.com/hsezhiyan), [Sicong Huang](https://www.cs.toronto.edu/~huang/), [Aidan N. Gomez](https://github.com/aidangomez)
 
 ### Features
 - Agents: [DQN](rl/agents/algos/dqn.py), [Vanilla Policy Gradient](rl/agents/algos/vanilla_pg.py), [DDPG](rl/agents/algos/ddpg.py), [PPO](rl/agents/algos/ppo.py)
@@ -9,7 +9,8 @@ Modular codebase for reinforcement learning models training, testing and visuali
   - OpenAI [Gym](https://github.com/openai/gym)
     - support both `Discrete` and `Box` environments
     - render (`--render`) and save (`--record_video`) environment replay
-  - OpenAI [CoinRun](https://github.com/openai/coinrun)
+  - OpenAI [Atari](https://github.com/openai/atari-py)
+  - OpenAI [ProcGen](https://github.com/openai/procgen)
 - Model-free asynchronous training  (`--num_workers`)
 - Memory replay: [Simple](rl/memory/simple.py), [Proportional Prioritized Experience Replay](rl/memory/prioritized.py)
 - Modularized
@@ -21,15 +22,28 @@ Modular codebase for reinforcement learning models training, testing and visuali
 
 Example for recorded envrionment on various RL agents.
 
-| MountainCar-v0 |  Pendulum-v0 | VideoPinball-v0 | Tennis-v0 |
-|---|---|---|---|
-![MountainCar-v0](gif/mountaincar.gif)|![Pendulum-v0](gif/pendulum.gif)|![VideoPinball-v0](gif/pinball.gif)|![Tennis-v0](gif/tennis.gif)
+| MountainCar-v0                         | Pendulum-v0                      | VideoPinball-v0                     | procgen-coinrun-v0            |
+| -------------------------------------- | -------------------------------- | ----------------------------------- | ----------------------------- |
+| ![MountainCar-v0](gif/mountaincar.gif) | ![Pendulum-v0](gif/pendulum.gif) | ![VideoPinball-v0](gif/pinball.gif) | ![Tennis-v0](gif/coinrun.gif) |
 
 ### Requirements
-- Run setup scripts to install all dependencies and environments
+It is recommended to install the codebase in a virtual environment ([virtualenv](https://pypi.org/project/virtualenv/) or [conda](https://conda.io/en/latest/)). 
+
+### Quick install
+Configure `use_gpu` and (if on OSX) `mac_package_manager` (either [macports](https://www.macports.org) or [homebrew](https://brew.sh)) params in `setup.sh`, then run it as
+```bash
+sh setup.sh
 ```
-./setup.sh
-```
+
+### Manual setup
+You need to install the following for your system:
+
+- [TensorFlow](https://www.tensorflow.org/install)
+- [OpenAI Gym](https://gym.openai.com/docs/#installation)
+- [OpenAI Atari](https://github.com/openai/atari-py)
+- [OpenAI ProcGen](https://github.com/openai/procgen)
+- [FFmpeg](https://ffmpeg.org/download.html)
+- Additional python packages `pip install -r ../requirements.txt`
 
 ### Quick Start
 ```
@@ -38,11 +52,11 @@ python train.py --sys ... --hparams ... --output_dir ...
 # run tensorboard
 tensorboard --logdir ...
 # test agnet
-python train.py --sys ... --hparams ... --output_dir ... --training False --render True
+python train.py --sys ... --hparams ... --output_dir ... --test_only --render
 ```
 
 ### Hyper-parameters
-Check [init_flags()](https://github.com/for-ai/rl/blob/master/train.py#L17), [defaults.py](rl/hparams/defaults.py) for default hyper-parameters, and check [hparams/dqn.py](rl/hparams/dqn.py) agent specific hyper-parameters examples.
+Check available flags with `--help`, [defaults.py](rl/hparams/defaults.py) for default hyper-parameters, and check [hparams/dqn.py](rl/hparams/dqn.py) agent specific hyper-parameters examples.
 - `hparams`: Which hparams to use, defined under [rl/hparams](rl/hparams)
 - `sys`: Which system environment to use.
 - `env`: Which RL environment to use.
@@ -50,11 +64,14 @@ Check [init_flags()](https://github.com/for-ai/rl/blob/master/train.py#L17), [de
 - `train_steps`:, Number of steps to train the agent.
 - `test_episodes`: Number of episodes to test the agent.
 - `eval_episodes`: Number of episodes to evaluate the agent.
-- `training`: train or test agent.
+- `test_only`: Test agent without training.
 - `copies`: Number of independent training/testing runs to do.
 - `render`: Render game play.
 - `record_video`: Record game play.
 - `num_workers`, number of workers.
+
+### Documentation
+More detailed documentation can be found [here](https://rl-codebase.readthedocs.io/en/latest/).
 
 ### Contributing
 We'd love to accept your contributions to this project. Please feel free to open an issue, or submit a pull request as necessary. Contact us [team@for.ai](mailto:team@for.ai) for potential collaborations and joining [FOR.ai](https://for.ai).
